@@ -19,8 +19,6 @@ public class ManagingWaits {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver",
-                "C:\\Maculatura\\Testing\\JavaAutomation\\Drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }

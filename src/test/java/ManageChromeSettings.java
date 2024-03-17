@@ -16,7 +16,6 @@ import java.time.Duration;
 public class ManageChromeSettings {
     public static String baseUrl = "https://www.automationtesting.co.uk/";
     private WebDriver driver;
-    private ChromeOptions options;
 
     @Before
     public void setUp() {
@@ -24,7 +23,7 @@ public class ManageChromeSettings {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 
-        options = new ChromeOptions();
+        ChromeOptions options = new ChromeOptions();
         options.merge(cap);
         options.addArguments("--start-maximized");
         options.addArguments("--incognito");

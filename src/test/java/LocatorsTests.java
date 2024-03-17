@@ -1,22 +1,36 @@
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.Set;
+
 import static java.lang.Thread.*;
 
 public class LocatorsTests {
     public static String baseUrl = "https://www.automationtesting.co.uk";
-//	String generatedString = RandomStringUtils.randomAlphabetic(10);
+    //	String generatedString = RandomStringUtils.randomAlphabetic(10);
+    private WebDriver driver;
+
+    @Before
+    public void setUp() {
+        //Chromedriver is managed by maven here
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+    }
+
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
     @Test
     public void CheckLocators() throws InterruptedException {
-
-        System.setProperty("webdriver.chrome.driver",
-                "C:\\Maculatura\\Testing\\JavaAutomation\\Drivers\\chromedriver.exe");
-
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(baseUrl + "/contactForm.html");
@@ -95,7 +109,7 @@ public class LocatorsTests {
         driver.switchTo().window(MainWindow);
         //Accordions
         driver.get(baseUrl + "/accordion.html");
-        for(int i = 0; i<10; i++){
+        for (int i = 0; i < 10; i++) {
             driver.findElement(By.cssSelector(".accordion > div:nth-of-type(1)")).click();
             driver.findElement(By.cssSelector(".accordion > div:nth-of-type(3)")).click();
             driver.findElement(By.cssSelector(".accordion > div:nth-of-type(5)")).click();
@@ -104,7 +118,7 @@ public class LocatorsTests {
         //Hidden elements
         driver.get(baseUrl + "/hiddenElements.html");
         boolean hidden1 = driver.findElement(By.cssSelector(".col-12.col-12-small > p:nth-of-type(2)")).isDisplayed();
-        boolean hidden2  = driver.findElement(By.cssSelector(".col-12.col-12-small > p:nth-of-type(3)")).isDisplayed();
+        boolean hidden2 = driver.findElement(By.cssSelector(".col-12.col-12-small > p:nth-of-type(3)")).isDisplayed();
         System.out.println("show if element is hidden: " + hidden1 + " ,show if element is hidden: " + hidden2);
 
         driver.quit();
