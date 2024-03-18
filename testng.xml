@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
+<!-- if uncommented will run only tests with the specified group-->
+<!--    <groups>-->
+<!--        <run>-->
+<!--            <include name="regression"/>-->
+<!--        </run>-->
+<!--    </groups>-->
+    
+    <parameter name="email" value="test@test.com"/>
+    <parameter name="password" value="test123"/>
+
     <test name="Test" thread-count="5" preserve-order="true">
         <packages>
             <package name="TestNGfolder"/>
