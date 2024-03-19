@@ -4,13 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class DependsOnMethods {
+@Listeners(TestNGfolder.ITestListenerImplementation.class)
+public class TestListener {
     private static String baseUrl = "https://teststore.automationtesting.co.uk/index.php?controller=authentication?back=https%3A%2F%2Fteststore.automationtesting.co.uk%2Findex.php";
     private WebDriver driver;
 
@@ -27,12 +30,14 @@ public class DependsOnMethods {
     @AfterSuite
     void cleanUp() {
         if (driver != null) {
+            //driver.close();
             driver.quit();
         }
     }
 
-     @Test(enabled = false)//this attribute prevents test execution
+    @Test
     public void enterEmail() throws InterruptedException {
+        Assert.fail();
         driver.findElement(By.cssSelector("section input[name='email']")).sendKeys("test@test.com");
         Thread.sleep(3000);
     }
@@ -43,10 +48,9 @@ public class DependsOnMethods {
         Thread.sleep(3000);
     }
 
-    @Test(dependsOnMethods = {"enterPassword"})
+    @Test
     public void clickBtn() throws InterruptedException {
         driver.findElement(By.cssSelector("button#submit-login")).click();
         Thread.sleep(3000);
     }
-
 }

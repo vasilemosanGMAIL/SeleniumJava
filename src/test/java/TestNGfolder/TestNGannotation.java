@@ -25,7 +25,6 @@ public class TestNGannotation {
     @AfterSuite
     void cleanUp() {
         if (driver != null) {
-            driver.close();
             driver.quit();
         }
     }
